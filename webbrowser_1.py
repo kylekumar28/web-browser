@@ -1,32 +1,27 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings
-from PyQt5.QtCore import QUrl
+from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtCore import QUrl
 import sys
-
 
 class MinimalBrowser(QMainWindow):
     def __init__(self, url):
         super().__init__()
 
         # Set up the main window
-        self.setWindowTitle("Minimal Browser")
-        self.setGeometry(100, 100, 1024, 768)  # Default window size
+        self.setWindowTitle("KAPS")
+        self.setGeometry(100, 100, 1400, 720)  # Default window size
 
         # Create a QWebEngineView to display the website
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl(url))
 
         # Disable all safety procedures and enable all features
-        settings = self.browser.settings()
-        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, True)
-        settings.setAttribute(QWebEngineSettings.PluginsEnabled, True)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, True)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, True)
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, False)
-        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, True)
-        settings.setAttribute(QWebEngineSettings.ShowScrollBars, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.JavascriptEnabled, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.PluginsEnabled, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.JavascriptCanOpenWindows, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.JavascriptCanAccessClipboard, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.LocalStorageEnabled, True)
+        self.browser.settings().setAttribute(self.browser.settings().WebAttribute.AllowRunningInsecureContent, True)
 
         # Create a layout and add the browser to it
         layout = QVBoxLayout()
@@ -38,7 +33,7 @@ class MinimalBrowser(QMainWindow):
         self.setCentralWidget(central_widget)
 
         # Launch in fullscreen mode
-        self.showFullScreen()
+        # self.showFullScreen()
 
 
 if __name__ == "__main__":
@@ -48,4 +43,4 @@ if __name__ == "__main__":
     browser = MinimalBrowser("https://www.kylekumar.com/kaps")
     browser.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
